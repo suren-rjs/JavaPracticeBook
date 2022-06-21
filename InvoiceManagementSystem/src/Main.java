@@ -38,28 +38,15 @@ import java.util.Scanner;
 public class Main {
   public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
-    System.out.println(
-            """
-                    =================================
-                    === Invoice Management System ===
-                    =================================
-            """);
+    System.out.println("=================================\n"+
+                    "=== Invoice Management System ===\n"+
+                    "=================================\n");
     boolean isUserWantsToContinue = true;
     while (isUserWantsToContinue) {
-      System.out.println(
-              """
-                      Following Features are Available
-                      1 -> Add a Customer\s
-                      2 -> Generate an Invoice
-                      3 -> List all customers
-                      4 -> List all Invoices
-                      5 -> List all Invoices for a customer
-                      6 -> Display the full details of an invoice
-                      7 -> Exit
-                      Enter Selection :""");
+      System.out.println("Following Features are Available\n1 -> Add a Customer\n2 -> Generate an Invoice\n3 -> List all customers\n4 -> List all Invoices\n5 -> List all Invoices for a customer\n6 -> Display the full details of an invoice\n7 -> Exit\nEnter Selection :");
       int userChoice = input.nextInt();
       switch (userChoice) {
-        case 1 -> {
+        case 1:
           System.out.println("\nEnter Customer Name:");
           String CustomerName = input.next();
           System.out.println("\nEnter Customer Contact:");
@@ -68,8 +55,9 @@ public class Main {
           Customer.UpdateCustomer(newCustomer);
           System.out.println("\nRegistration Success -> " + newCustomer.CustomerName);
           System.out.println("=============================================================");
-        }
-        case 2 -> {
+          break;
+
+        case 2:
           List<Product> ProductList = new ArrayList<>();
           System.out.println("\nEnter CustomerId:");
           int CustomerIdForInvoice = input.nextInt();
@@ -95,8 +83,9 @@ public class Main {
           Customer.UpdateCustomerInvoice(CustomerIdForInvoice, newInvoice.InvoiceId, ProductList);
           System.out.println("Invoice Created For " + currentCustomer.CustomerName);
           System.out.println("=============================================================");
-        }
-        case 3 -> {
+          break;
+
+        case 3:
           System.out.println("CustomerName         CustomerContact          TotalPurchase");
           for (Customer CustomerDetails : Customer.AllCustomers.values()) {
             System.out.println(
@@ -107,14 +96,16 @@ public class Main {
                             + CustomerDetails.TotalPurchase);
           }
           System.out.println("=========================================================");
-        }
-        case 4 -> {
+          break;
+
+        case 4:
           for (Invoice userInvoice : Invoice.AllInvoices.values()) {
             Invoice.ShowInvoiceDetails(userInvoice);
           }
           System.out.println("=========================================================");
-        }
-        case 5 -> {
+          break;
+
+        case 5:
           System.out.println("\nEnter CustomerId:");
           int getInvoiceCustomerId = input.nextInt();
           if (validateExistingCustomers(getInvoiceCustomerId)) break;
@@ -123,8 +114,9 @@ public class Main {
             Invoice.ShowInvoiceDetails(userInvoice);
           }
           System.out.println("=========================================================");
-        }
-        case 6 -> {
+          break;
+
+        case 6:
           System.out.println("Enter InvoiceId:");
           int invoiceId = input.nextInt();
           if (!Invoice.AllInvoices.containsKey(invoiceId)) {
@@ -134,8 +126,11 @@ public class Main {
           Invoice userInvoice = Invoice.AllInvoices.get(invoiceId);
           Invoice.ShowInvoiceDetails(userInvoice);
           System.out.println("=========================================================");
-        }
-        case 7 -> isUserWantsToContinue = false;
+          break;
+
+        case 7:
+          isUserWantsToContinue = false;
+          break;
       }
     }
   }
