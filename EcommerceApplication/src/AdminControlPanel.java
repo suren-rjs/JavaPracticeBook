@@ -22,6 +22,8 @@ public class AdminControlPanel {
                     CouponCodes.CouponCodesControlPanel();
                     break;
                 case 4:
+                    isAdminWantedToContinue = false;
+                    PublicUserControlPanel.userControls();
                     break;
             }
         }
