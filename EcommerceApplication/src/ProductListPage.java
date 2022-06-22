@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class ProductListPage {
     static String invoice = "";
+    static int TotalPayableAmount;
+    static int CouponDiscount;
     static Scanner input = new Scanner(System.in);
     public static void CustomerControls(int customerId) {
         if(!isExistingUser(customerId)) return;
@@ -52,14 +54,19 @@ public class ProductListPage {
                     System.out.println("Item Removed from cart");
                     break;
                 case 2:
-                    invoice = "";
+                    invoice = "=========================================\n";
+                    TotalPayableAmount = 0;
+                    CouponDiscount = 0;
                     currentCustomer.CartItems.forEach(id -> {
                         Product currentProduct = Product.allProducts.get(id);
                         invoice += currentProduct.productName+"   Rs."+currentProduct.productPrice+"\n";
+                        TotalPayableAmount+=currentProduct.productPrice;
                         Product.allProducts.remove(id);
                     });
-                    currentCustomer.CustomerInvoices.add(invoice);
+                    CouponDiscount = applyCouponCode();
+                    currentCustomer.CustomerInvoices.add(invoice+"\nTotal Purchase Amount = Rs."+TotalPayableAmount+"\nTotal Discount Amount = Rs."+CouponDiscount+"\nTotal Amount Paid = Rs."+(TotalPayableAmount-CouponDiscount));
                     System.out.println("============ Payment Success ============ ");
+                    currentCustomer.CartItems.clear();
                     break;
                 case 3:
                     isUserWantedToContinue = false;
@@ -71,6 +78,25 @@ public class ProductListPage {
         return;
     }
 
+    private static int applyCouponCode() {
+        System.out.println("Enter Coupon Code:");
+        String Code = input.next();
+        if(!CouponCodes.couponList.containsKey(Code)){
+            System.out.println("Invalid Promo Code\n1 -> Enter PromoCode Again\nAny Key to Continue Without PromoCode\nChoice : ");
+            int choice = input.nextInt();
+            switch (choice){
+                case 1:
+                    applyCouponCode();
+                    break;
+                default:
+                    return 0;
+            }
+
+        }
+        CouponCodes AppliedCoupon = CouponCodes.couponList.get(Code);
+        return AppliedCoupon.DiscountAmount;
+    }
+
     private static void ShowAllProducts(Customer currentCustomer) {
         Product.updateProductList();
         for (Product product : Product.productArrayList) {
@@ -79,7 +105,7 @@ public class ProductListPage {
         }
         boolean isUserWantsToAddMore = true;
         while (isUserWantsToAddMore){
-            System.out.println("1 -> Add Product To Cart\n2 -> Back");
+            System.out.println("1 -> Add Product To Cart\n2Goto Cart\n3 -> Back");
             int choice = input.nextInt();
             switch (choice){
                 case 1:
@@ -88,6 +114,9 @@ public class ProductListPage {
                     currentCustomer.CartItems.add(productId);
                     break;
                 case 2:
+                    ShowCartItems(currentCustomer);
+                    break;
+                case 3:
                     isUserWantsToAddMore = false;
                     PublicUserControlPanel.userControls();
                     break;
