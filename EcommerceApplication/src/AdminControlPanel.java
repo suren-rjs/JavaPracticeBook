@@ -8,7 +8,7 @@ public class AdminControlPanel {
         }
         boolean isAdminWantedToContinue = true;
         while (isAdminWantedToContinue){
-            System.out.println("1 -> Products\n2 -> Customers\n3 -> Coupon Codes\n4 -> Back To Home\nEnterChoice");
+            System.out.println("1 -> Products\n2 -> Customers\n3 -> Coupon Codes\n4 -> Logout\nEnterChoice");
             Scanner adminInput = new Scanner(System.in);
             int adminChoice = adminInput.nextInt();
             switch (adminChoice){

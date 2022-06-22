@@ -69,6 +69,7 @@ public class ProductListPage {
                     currentCustomer.CartItems.clear();
                     break;
                 case 3:
+                    CustomerControls(currentCustomer.Customer_id);
                     isUserWantedToContinue = false;
                     break;
                 default:
@@ -79,6 +80,9 @@ public class ProductListPage {
     }
 
     private static int applyCouponCode() {
+        System.out.println("Has CouponCode?(Y/N)");
+        char answer = input.next().toUpperCase().charAt(0);
+        if(answer != 'Y') return 0;
         System.out.println("Enter Coupon Code:");
         String Code = input.next();
         if(!CouponCodes.couponList.containsKey(Code)){
@@ -105,7 +109,7 @@ public class ProductListPage {
         }
         boolean isUserWantsToAddMore = true;
         while (isUserWantsToAddMore){
-            System.out.println("1 -> Add Product To Cart\n2Goto Cart\n3 -> Back");
+            System.out.println("1 -> Add Product To Cart\n2 -> Goto Cart\n3 -> Back");
             int choice = input.nextInt();
             switch (choice){
                 case 1:
