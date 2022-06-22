@@ -11,7 +11,7 @@ public class ProductListPage {
         System.out.println("======== Welcome "+currentCustomer.Customer_name+" =========");
         boolean isUserWantedToContinue = true;
         while (isUserWantedToContinue){
-            System.out.println("1 -> List All Products\n2 -> Cart Items\n3 -> Purchase History\n4 -> Back\nChoice");
+            System.out.println("1 -> List All Products\n2 -> Cart Items\n3 -> Purchase History\n4 -> Logout\nChoice");
             int choice = input.nextInt();
             switch (choice){
                 case 1:
