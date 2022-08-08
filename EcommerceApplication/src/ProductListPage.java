@@ -88,12 +88,8 @@ public class ProductListPage {
         if(!CouponCodes.couponList.containsKey(Code)){
             System.out.println("Invalid Promo Code\n1 -> Enter PromoCode Again\nAny Key to Continue Without PromoCode\nChoice : ");
             int choice = input.nextInt();
-            switch (choice){
-                case 1:
-                    applyCouponCode();
-                    break;
-                default:
-                    return 0;
+            if (choice == 1) {
+                applyCouponCode();
             }
 
         }
@@ -125,6 +121,7 @@ public class ProductListPage {
                     PublicUserControlPanel.userControls();
                     break;
                 default:
+                    CustomerControls(currentCustomer.Customer_id);
                     break;
             }
         }
