@@ -34,9 +34,12 @@
  *===================================================================================================
  */
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
 
-public class Main {
+public class TaxiBookingApplication {
   static int customerId = 1;
 
   public static void main(String[] args) {
@@ -48,7 +51,7 @@ public class Main {
     Scanner input = new Scanner(System.in);
     boolean userWantsToContinue = true;
     //    Create No of Taxies
-    List<Taxi> allTaxies = createTaxiList(4);
+    List<Taxi> allTaxies = createTaxiList();
 
     while (userWantsToContinue) {
       System.out.println(
@@ -93,13 +96,13 @@ public class Main {
         availableFreeTaxies.add(currentTaxi);
       }
     }
-    Collections.sort(availableFreeTaxies, (a, b) -> a.TotalEarnings - b.TotalEarnings);
+    availableFreeTaxies.sort(Comparator.comparingInt(a -> a.TotalEarnings));
     return availableFreeTaxies;
   }
 
-  private static List<Taxi> createTaxiList(int noOfTaxi) {
+  private static List<Taxi> createTaxiList() {
     List<Taxi> createdTaxiList = new ArrayList<>();
-    for (int i = 0; i < noOfTaxi; i++) {
+    for (int i = 0; i < 4; i++) {
       createdTaxiList.add(new Taxi());
     }
     return createdTaxiList;

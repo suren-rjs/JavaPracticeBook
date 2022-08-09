@@ -4,6 +4,21 @@ public class Main {
   public static void main(String[] args) {
     int[] intArray = {5, 7, 1, 15, 10, 3, 9};
     insertionSort(intArray);
+    findNextGreaterNumber();
+  }
+
+  private static void findNextGreaterNumber() {
+    int[] inputArray = {4, 5, 2, 25};
+    for (int i = 0; i < inputArray.length; i++) {
+      int currentValue = inputArray[i], j = i, nextGreaterValues = -1;
+      while (++j < inputArray.length) {
+        if (currentValue < inputArray[j]) {
+          nextGreaterValues = inputArray[j];
+          break;
+        }
+      }
+      System.out.print(nextGreaterValues + " ");
+    }
   }
 
   private static void insertionSort(int[] intArray) {
