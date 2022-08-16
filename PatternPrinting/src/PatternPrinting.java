@@ -13,7 +13,7 @@ public class PatternPrinting {
     firstMaxMin();
     oddPositionInDescendingOrder();
     findFirstAccusedIndexOfSecondStringInFirstString();
-//    spiralPattern();
+    spiralPattern();
     mergeTwoArraysWithoutDuplicates();
     printNumberInWords();
   }
@@ -122,7 +122,27 @@ public class PatternPrinting {
   }
 
   private static void spiralPattern() {
-    int[][] input = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    int matrix[][] = {
+      {1, 2, 3, 4}, {14, 15, 16, 5}, {13, 20, 17, 6}, {12, 19, 18, 7}, {11, 10, 9, 8}
+    };
+
+    int rowStart = 0, rowEnd = matrix.length;
+    int colStart = 0, colEnd = matrix[0].length;
+
+    while (rowStart < rowEnd && colStart < colEnd) {
+      for (int i = colStart; i < colEnd; i++) System.out.print(matrix[rowStart][i] + " ");
+
+      rowStart += 1;
+      for (int i = rowStart; i < rowEnd; i++) System.out.print(matrix[i][colEnd - 1] + " ");
+
+      colEnd -= 1;
+      for (int i = colEnd - 1; i >= colStart; i--) System.out.print(matrix[rowEnd - 1][i] + " ");
+
+      rowEnd -= 1;
+      for (int i = rowEnd - 1; i >= rowStart; i--) System.out.print(matrix[i][colStart] + " ");
+
+      colStart += 1;
+    }
   }
 
   private static void findRepeatedNumCountInGivenArray() {
