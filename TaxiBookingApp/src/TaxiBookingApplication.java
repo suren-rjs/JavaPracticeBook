@@ -1,29 +1,37 @@
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
 /**
- * ===================================================================================================
+ * ===============================================================================
  *
  * <p>No. of taxis (Assume 4) 6 Points A B C D E F -> Each have 15Km between 2 one point to another
- * it takes 60 min first 5km -> Rs.100 , then 10 for every Km Time: Hrs (for Simplicity) All taxis
- * are initiated at A When customer book taxi, free taxi will be allocated two free taxis are same
- * point -> one with lower earning will be allocated Taxi charges only from customer pickup point to
- * drop point if no taxi available then booking rejected
- * ________________________________________________
+ * it takes 60 min first 5km -> Rs.100 , then 10 for every Km Time: Hrs (for Simplicity)
+ *
+ * <p>All taxis are initiated at A When customer book taxi, free taxi will be allocated two free
+ * taxis are same point -> one with lower earning will be allocated Taxi charges only from customer
+ * pickup point to drop point
+ *
+ * <p>if no taxi available then booking rejected
+ *
+ * <p>________________________________________________
  *
  * <p>Taxi : TaxiNumber : CurrentLocation : IsBooked TotalEarnings : FreeTime :
  * ________________________________________________
  *
  * <p>BookingProcess: DistanceBetweenTaxiAndCustomer -> ToFindNearestTaxi
  * DistanceBetweenPickupAndDrop -> ToCalculateFee NextFreeTime -> ForNextBooking NextPickupPoint ->
- * ToAssignNextPickUpPoint ________________________________________________ (A-0)-----------(B-0)
- * 1---------------2 Check Taxi availability time and taxi must reach before their pickup time
+ * ToAssignNextPickUpPoint
  *
- * <p>===================================================================================================
+ * <p>________________________________________________
+ *
+ * <p>(A-0)-----------(B-0) 1---------------2
+ *
+ * <p>Check Taxi availability time and taxi must reach before their pickup time
+ *
+ * <p>===============================================================================
  */
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-
 public class TaxiBookingApplication {
   static int customerId = 1;
 
