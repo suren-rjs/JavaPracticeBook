@@ -20,6 +20,6 @@ public class Taxi {
   }
 
   public String toString() {
-    return "";
+    return "Taxi " + this.TaxiNumber + " : Earning -> Rs. " + this.TotalEarnings;
   }
 }
