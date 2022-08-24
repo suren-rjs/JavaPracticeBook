@@ -5,17 +5,21 @@ class Request extends Thread {
 
   String type;
   RunWay runWay;
+  Flight allottedFlight;
 
-  public Request(String aName, int weightA, String cho, int compTime, RunWay rw) {
-    this.requestedFlight = aName;
-    this.flightWeight = weightA;
-    this.runWay = rw;
-    this.coolTime = compTime;
-    this.type = cho;
+  public Request(String flightName, int weight, String requestType, int coolTime, RunWay runWay, Flight selectedFlight) {
+    this.requestedFlight = flightName;
+    this.flightWeight = weight;
+    this.runWay = runWay;
+    this.coolTime = coolTime;
+    this.type = requestType;
+    this.allottedFlight = selectedFlight;
   }
 
   public void run() {
     runWay.status = false;
+    runWay.allottedFlight = allottedFlight;
+    allottedFlight.isRunwayAllocated = true;
     try {
       System.out.println(
           "---------------------------------------------------------------------------------");
@@ -28,6 +32,8 @@ class Request extends Thread {
           "---------------------------------------------------------------------------------");
       Thread.sleep(1000L * coolTime);
       runWay.status = true;
+      runWay.allottedFlight = null;
+      allottedFlight.isRunwayAllocated = false;
     } catch (Exception ignored) {
     }
   }

@@ -54,6 +54,7 @@ class AirTrafficControl extends Thread {
         runWays.forEach(System.out::println);
         break;
       case 5:
+        System.out.println("Exiting...");
         System.exit(0);
     }
   }
@@ -64,18 +65,20 @@ class AirTrafficControl extends Thread {
     Flight getFlight =
         flights.stream().filter(f -> f.flightName.equals(flightName)).findFirst().orElse(null);
     if (getFlight != null) {
-      System.out.println("Enter weight of flight(in tons):");
-      flightWeight = sc.nextInt();
-      compTime = getFlight.computeTime(flightWeight);
-      checkAndAssignRunWay();
+      if (!getFlight.isRunwayAllocated){
+        System.out.println("Enter weight of flight(in tons):");
+        flightWeight = sc.nextInt();
+        compTime = getFlight.computeTime(flightWeight);
+        checkAndAssignRunWay(getFlight);
+      } else System.out.println("--> Runway already allocated for this flight\n");
     } else System.out.println("Flight doesn't authorised");
   }
 
-  public void checkAndAssignRunWay() {
+  public void checkAndAssignRunWay(Flight selectedFlight) {
     RunWay selectedRunWay =
         runWays.stream().filter(r -> compTime <= r.time && r.status).findFirst().orElse(null);
     if (selectedRunWay != null) {
-      Request r = new Request(flightName, flightWeight, cho, compTime, selectedRunWay);
+      Request r = new Request(flightName, flightWeight, cho, compTime, selectedRunWay, selectedFlight);
       r.start();
       try {
         Thread.sleep(500);

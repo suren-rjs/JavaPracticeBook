@@ -2,6 +2,7 @@ class Flight {
   String flightName;
   int maxWeight;
   int allottedTime;
+  boolean isRunwayAllocated = false;
 
   Flight(String fName, int maxWeight, int timeHalt) {
     this.flightName = fName;
