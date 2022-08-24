@@ -27,16 +27,16 @@ class AirTrafficControl extends Thread {
   }
 
   public static void main(String[] args) {
-    AirTrafficControl atc = new AirTrafficControl();
+    AirTrafficControl controller = new AirTrafficControl();
     while (true) {
-      atc.getChoice();
+      controller.getChoice();
     }
   }
 
   public void getChoice() {
     System.out.println(
         "1.Take off\n2.Landing\n3.Emergency Landing\n4.show RunWays\n5.Exit\nEnter Your Choice :");
-    ch = sc.nextInt();
+    ch = getIntInput();
     switch (ch) {
       case 1:
         typeOfRequest = "Take Off";
@@ -51,11 +51,22 @@ class AirTrafficControl extends Thread {
         getAndAllocate();
         break;
       case 4:
+        System.out.println("------------------------------");
         runWays.forEach(System.out::println);
+        System.out.println("------------------------------");
         break;
       case 5:
         System.out.println("Exiting...");
         System.exit(0);
+    }
+  }
+
+  private int getIntInput() {
+    sc = new Scanner(System.in);
+    try{
+      return sc.nextInt();
+    }catch (Exception e){
+      return getIntInput();
     }
   }
 
@@ -67,7 +78,7 @@ class AirTrafficControl extends Thread {
     if (getFlight != null) {
       if (!getFlight.isRunwayAllocated){
         System.out.println("Enter weight of flight(in tons):");
-        flightWeight = sc.nextInt();
+        flightWeight = getIntInput();
         timePeriod = getFlight.computeTime(flightWeight);
         checkAndAssignRunWay(getFlight);
       } else System.out.println("--> Runway already allocated for this flight\n");
