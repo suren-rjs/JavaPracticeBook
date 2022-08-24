@@ -16,6 +16,50 @@ public class PatternPrinting {
     spiralPattern();
     mergeTwoArraysWithoutDuplicates();
     printNumberInWords();
+    slidingIndex();
+    patternPrinting();
+    System.out.println(
+        Arrays.toString(placeZerosLast(new int[] {8, 0, 4, 0, 2, 0, 1, 3, 55, 5001})));
+  }
+
+  private static int[] placeZerosLast(int[] numbs) {
+    int[] newArr = new int[numbs.length];
+    int count = 0;
+    for (int num : numbs) {
+      if (num != 0) newArr[count++] = num;
+    }
+    return newArr;
+  }
+
+  private static void patternPrinting() {
+    int num = 5;
+    String start = "1";
+    System.out.println(start);
+    for (int i = 0; i < num - 1; i++) {
+      StringBuilder str = new StringBuilder();
+      for (int j = 0; j < start.length(); j++) {
+        int cnt = 1;
+        while (j + 1 < start.length() && start.charAt(j) == start.charAt(j + 1)) {
+          cnt++;
+          j++;
+        }
+        str.append(cnt).append(start.charAt(j));
+      }
+      start = str.toString();
+      System.out.println(start);
+    }
+  }
+
+  private static void slidingIndex() {
+    int[] arr = {1, 2, 3, 1, 4, 5, 2, 3, 6};
+    int k = 3;
+    for (int i = 0; i <= arr.length - k; i++) {
+      int max = arr[i];
+      for (int j = 1; j < k; j++) {
+        if (arr[i + j] > max) max = arr[i + j];
+      }
+      System.out.print(max + " ");
+    }
   }
 
   private static void printNumberInWords() {
@@ -122,7 +166,7 @@ public class PatternPrinting {
   }
 
   private static void spiralPattern() {
-    int matrix[][] = {
+    int[][] matrix = {
       {1, 2, 3, 4}, {14, 15, 16, 5}, {13, 20, 17, 6}, {12, 19, 18, 7}, {11, 10, 9, 8}
     };
 
@@ -232,7 +276,7 @@ public class PatternPrinting {
     return intArray;
   }
 
-  private static int[] descendingSort(int[] intArray) {
+  private static void descendingSort(int[] intArray) {
     for (int i = 1; i < intArray.length; i++) {
       int previousIndex = i - 1, currentValue = intArray[i];
       while ((previousIndex > -1) && intArray[previousIndex] < currentValue) {
@@ -240,6 +284,5 @@ public class PatternPrinting {
       }
       intArray[previousIndex + 1] = currentValue;
     }
-    return intArray;
   }
 }
