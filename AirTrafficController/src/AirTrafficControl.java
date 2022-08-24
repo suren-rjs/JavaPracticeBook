@@ -5,9 +5,9 @@ import java.util.Scanner;
 class AirTrafficControl extends Thread {
   String flightName;
   int flightWeight;
-  int compTime;
+  int timePeriod;
   int ch;
-  String cho = "";
+  String typeOfRequest = "";
   ArrayList<Flight> flights;
   ArrayList<RunWay> runWays;
   Scanner sc = new Scanner(System.in);
@@ -39,15 +39,15 @@ class AirTrafficControl extends Thread {
     ch = sc.nextInt();
     switch (ch) {
       case 1:
-        cho = "Take Off";
+        typeOfRequest = "Take Off";
         getAndAllocate();
         break;
       case 2:
-        cho = "Landing";
+        typeOfRequest = "Landing";
         getAndAllocate();
         break;
       case 3:
-        cho = "Emergency Landing";
+        typeOfRequest = "Emergency Landing";
         getAndAllocate();
         break;
       case 4:
@@ -68,7 +68,7 @@ class AirTrafficControl extends Thread {
       if (!getFlight.isRunwayAllocated){
         System.out.println("Enter weight of flight(in tons):");
         flightWeight = sc.nextInt();
-        compTime = getFlight.computeTime(flightWeight);
+        timePeriod = getFlight.computeTime(flightWeight);
         checkAndAssignRunWay(getFlight);
       } else System.out.println("--> Runway already allocated for this flight\n");
     } else System.out.println("Flight doesn't authorised");
@@ -76,9 +76,9 @@ class AirTrafficControl extends Thread {
 
   public void checkAndAssignRunWay(Flight selectedFlight) {
     RunWay selectedRunWay =
-        runWays.stream().filter(r -> compTime <= r.time && r.status).findFirst().orElse(null);
+        runWays.stream().filter(r -> timePeriod <= r.time && r.status).findFirst().orElse(null);
     if (selectedRunWay != null) {
-      Request r = new Request(flightName, flightWeight, cho, compTime, selectedRunWay, selectedFlight);
+      Request r = new Request(flightName, flightWeight, typeOfRequest, timePeriod, selectedRunWay, selectedFlight);
       r.start();
       try {
         Thread.sleep(500);
