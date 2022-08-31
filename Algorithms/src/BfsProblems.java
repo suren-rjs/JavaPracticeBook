@@ -97,7 +97,7 @@ class BfsProblems {
     private static void findAllRightNodes(Node root) {
         Map<Integer, Integer> rightNodes = new HashMap<>();
         printAllRightNodes(rightNodes, 1, root);
-        rightNodes.forEach((level, rightNode) -> System.out.print(rightNode + " "));
+        rightNodes.values().forEach(System.out::print);
     }
 
     private static void printAllRightNodes(Map<Integer, Integer> rightNodes, int level, Node root) {

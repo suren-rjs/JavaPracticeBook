@@ -1,4 +1,4 @@
-/*
+/**
 The application was TOLL PAYMENT PROCESSING .
 They insisted us to do it in a object-oriented language. First they asked the design( what are all the classes and objects & what data structure do you use).
 Application description:
